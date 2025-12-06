@@ -139,7 +139,7 @@ export default function Home() {
 
       {/* CREDIT SYSTEM */}
       <section id="pricing" className="py-20 relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-0">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}

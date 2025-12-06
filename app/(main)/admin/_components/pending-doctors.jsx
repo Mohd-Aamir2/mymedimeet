@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -23,30 +23,16 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { updateDoctorStatus } from "@/actions/admin";
 import useFetch from "@/hooks/use-fetch";
-import { useEffect } from "react";
 import { BarLoader } from "react-spinners";
 
 export function PendingDoctors({ doctors }) {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
 
-  // Custom hook for approve/reject server action
-  const {
-    loading,
-    data,
-    fn: submitStatusUpdate,
-  } = useFetch(updateDoctorStatus);
+  const { loading, data, fn: submitStatusUpdate } = useFetch(updateDoctorStatus);
 
-  // Open doctor details dialog
-  const handleViewDetails = (doctor) => {
-    setSelectedDoctor(doctor);
-  };
+  const handleViewDetails = (doctor) => setSelectedDoctor(doctor);
+  const handleCloseDialog = () => setSelectedDoctor(null);
 
-  // Close doctor details dialog
-  const handleCloseDialog = () => {
-    setSelectedDoctor(null);
-  };
-
-  // Handle approve or reject doctor
   const handleUpdateStatus = async (doctorId, status) => {
     if (loading) return;
 
@@ -58,13 +44,11 @@ export function PendingDoctors({ doctors }) {
   };
 
   useEffect(() => {
-    if (data && data?.success) {
-      handleCloseDialog();
-    }
+    if (data?.success) handleCloseDialog();
   }, [data]);
 
   return (
-    <div>
+    <div className="p-4 sm:p-6 md:p-8">
       <Card className="bg-muted/20 border-emerald-900/20">
         <CardHeader>
           <CardTitle className="text-xl font-bold text-white">
@@ -80,14 +64,14 @@ export function PendingDoctors({ doctors }) {
               No pending verification requests at this time.
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {doctors.map((doctor) => (
                 <Card
                   key={doctor.id}
                   className="bg-background border-emerald-900/20 hover:border-emerald-700/30 transition-all"
                 >
                   <CardContent className="p-4">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <div className="bg-muted/20 rounded-full p-2">
                           <User className="h-5 w-5 text-emerald-400" />
@@ -98,11 +82,10 @@ export function PendingDoctors({ doctors }) {
                           </h3>
                           <p className="text-sm text-muted-foreground">
                             {doctor.specialty} • {doctor.experience} years
-                            experience
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 self-end md:self-auto">
+                      <div className="flex items-center gap-2 mt-2 sm:mt-0">
                         <Badge
                           variant="outline"
                           className="bg-amber-900/20 border-amber-900/30 text-amber-400"
@@ -127,10 +110,9 @@ export function PendingDoctors({ doctors }) {
         </CardContent>
       </Card>
 
-      {/* Doctor Details Dialog */}
       {selectedDoctor && (
         <Dialog open={!!selectedDoctor} onOpenChange={handleCloseDialog}>
-          <DialogContent className="max-w-3xl">
+          <DialogContent className="max-w-full sm:max-w-lg md:max-w-3xl mx-2 sm:mx-auto">
             <DialogHeader>
               <DialogTitle className="text-xl font-bold text-white">
                 Doctor Verification Details
@@ -143,7 +125,7 @@ export function PendingDoctors({ doctors }) {
 
             <div className="space-y-6 py-4">
               {/* Basic Info */}
-              <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-6">
                 <div className="space-y-1 flex-1">
                   <h4 className="text-sm font-medium text-muted-foreground">
                     Full Name
@@ -181,7 +163,7 @@ export function PendingDoctors({ doctors }) {
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
                   <div className="space-y-1">
                     <h4 className="text-sm font-medium text-muted-foreground">
                       Specialty
@@ -198,7 +180,7 @@ export function PendingDoctors({ doctors }) {
                     </p>
                   </div>
 
-                  <div className="space-y-1 col-span-2">
+                  <div className="space-y-1 col-span-1 sm:col-span-2">
                     <h4 className="text-sm font-medium text-muted-foreground">
                       Credentials
                     </h4>
@@ -223,9 +205,7 @@ export function PendingDoctors({ doctors }) {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-emerald-400" />
-                  <h3 className="text-white font-medium">
-                    Service Description
-                  </h3>
+                  <h3 className="text-white font-medium">Service Description</h3>
                 </div>
                 <p className="text-muted-foreground whitespace-pre-line">
                   {selectedDoctor.description}
@@ -235,14 +215,14 @@ export function PendingDoctors({ doctors }) {
 
             {loading && <BarLoader width={"100%"} color="#36d7b7" />}
 
-            <DialogFooter className="flex sm:justify-between">
+            <DialogFooter className="flex flex-col sm:flex-row sm:justify-between gap-2 mt-4">
               <Button
                 variant="destructive"
                 onClick={() =>
                   handleUpdateStatus(selectedDoctor.id, "REJECTED")
                 }
                 disabled={loading}
-                className="bg-red-600 hover:bg-red-700"
+                className="bg-red-600 hover:bg-red-700 w-full sm:w-auto"
               >
                 <X className="mr-2 h-4 w-4" />
                 Reject
@@ -252,7 +232,7 @@ export function PendingDoctors({ doctors }) {
                   handleUpdateStatus(selectedDoctor.id, "VERIFIED")
                 }
                 disabled={loading}
-                className="bg-emerald-600 hover:bg-emerald-700"
+                className="bg-emerald-600 hover:bg-emerald-700 w-full sm:w-auto"
               >
                 <Check className="mr-2 h-4 w-4" />
                 Approve
