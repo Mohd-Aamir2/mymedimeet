@@ -31,7 +31,7 @@ import {
   markAppointmentCompleted,
 } from "@/actions/doctor";
 import { generateVideoToken } from "@/actions/appointments";
-import useFetch from "@/hooks/use-fetch";
+import useFetch from "@/hooks/use-fetch";   // if you have jsconfig.json alias set
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

@@ -1,11 +1,40 @@
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { SPECIALTIES } from "@/lib/specialities";
-
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Stethoscope } from "lucide-react";
 export default async function DoctorsPage() {
   return (
     <>
+<div className="flex justify-between mb-8">
+  {/* Left Button */}
+  <div>
+    <Button
+      asChild
+      size="lg"
+      className="bg-emerald-600 hover:bg-emerald-700 shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all"
+    >
+      <Link href="/patient/medical-profile">
+        Health-Check <ArrowRight className="ml-2 h-4 w-4" />
+      </Link>
+    </Button>
+  </div>
+
+  {/* Right Button */}
+  <div>
+    <Button
+      asChild
+      size="lg"
+      className="bg-emerald-600 hover:bg-emerald-700 shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all"
+    >
+      <Link href="/patient/heart-assessment">
+        Decease-risk <ArrowRight className="ml-2 h-4 w-4" />
+      </Link>
+    </Button>
+  </div>
+</div>
       <div className="flex flex-col items-center justify-center mb-8 text-center">
+        
         <h1 className="text-3xl font-bold text-white mb-2">Find Your Doctor</h1>
         <p className="text-muted-foreground text-lg">
           Browse by specialty or view all available healthcare providers

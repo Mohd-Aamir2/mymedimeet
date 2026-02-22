@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Clock, Plus, Loader2, AlertCircle } from "lucide-react";
 import { format } from "date-fns";
 import { setAvailabilitySlots } from "@/actions/doctor";
-import useFetch from "@/hooks/use-fetch";
+import useFetch from "@/frontend/hooks/use-fetch";
 import { toast } from "sonner";
 
 export function AvailabilitySettings({ slots }) {

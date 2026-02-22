@@ -22,7 +22,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { updateDoctorStatus } from "@/actions/admin";
-import useFetch from "@/hooks/use-fetch";
+import useFetch from "@/frontend/hooks/use-fetch";
 import { BarLoader } from "react-spinners";
 
 export function PendingDoctors({ doctors }) {
