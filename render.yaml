@@ -1,13 +1,11 @@
 services:
   - type: web
-    # Is naam ko unique rakhein (e.g., yourname-python-app-2026)
-    name: my-python-backend-unique-786 
+    name: heart-disease-backend-786
     env: python
     plan: free
+    rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn msin.py # 'app:app' ko apne main file name se replace karein
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
-      - key: PORT
-        value: 0.0.0.0
