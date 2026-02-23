@@ -1,13 +1,13 @@
 services:
   - type: web
-    # CHANGE THIS NAME TO SOMETHING UNIQUE (e.g., yourname-project-2026)
-    name: my-unique-app-v1-2026 
-    env: node # Use 'python', 'go', 'static', etc., depending on your tech stack
-    plan: free # Can be 'free' or 'starter'
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    # Is naam ko unique rakhein (e.g., yourname-python-app-2026)
+    name: my-python-backend-unique-786 
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn msin.py # 'app:app' ko apne main file name se replace karein
     envVars:
-      - key: NODE_VERSION
-        value: 20.0.0
+      - key: PYTHON_VERSION
+        value: 3.10.0
       - key: PORT
-        value: 10000
+        value: 0.0.0.0
