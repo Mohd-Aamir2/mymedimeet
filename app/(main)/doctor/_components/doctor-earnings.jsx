@@ -26,7 +26,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { requestPayout } from "@/actions/payout";
-import useFetch from "@/frontend/hooks/use-fetch";
+import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 
 export function DoctorEarnings({ earnings, payouts = [] }) {

@@ -43,3 +43,6 @@ next-env.d.ts
 /lib/private.key
 
 /lib/generated/prisma
+
+.venv
+__pycache__

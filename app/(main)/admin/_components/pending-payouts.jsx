@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { approvePayout } from "@/actions/admin";
-import useFetch from "@/frontend/hooks/use-fetch";
+import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 import { BarLoader } from "react-spinners";
 

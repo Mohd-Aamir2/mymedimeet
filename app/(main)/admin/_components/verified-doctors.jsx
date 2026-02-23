@@ -13,7 +13,7 @@ import { Check, Ban, Loader2, User, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { updateDoctorActiveStatus } from "@/actions/admin";
-import useFetch from "@/frontend/hooks/use-fetch";
+import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 
 export function VerifiedDoctors({ doctors }) {
