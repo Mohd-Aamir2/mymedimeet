@@ -1,0 +1,13 @@
+services:
+  - type: web
+    # CHANGE THIS NAME TO SOMETHING UNIQUE (e.g., yourname-project-2026)
+    name: my-unique-app-v1-2026 
+    env: node # Use 'python', 'go', 'static', etc., depending on your tech stack
+    plan: free # Can be 'free' or 'starter'
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.0.0
+      - key: PORT
+        value: 10000
